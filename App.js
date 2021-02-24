@@ -1,12 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
+
+import { Map, ModalView, Panel } from "./components/index";
 
 export default function App() {
+  const [points, setPoints] = useState([]);
+
+  console.log(points);
+
+  const handleLongPress = ({ nativeEvent }) => {
+    const newPoints = points.concat({
+      coordinate: nativeEvent.coordinate,
+    });
+    setPoints(newPoints);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Map longPress={handleLongPress} />
+      <Panel />
+      <ModalView />
     </View>
   );
 }
@@ -14,8 +27,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
 });
