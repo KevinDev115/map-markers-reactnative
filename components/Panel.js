@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default () => {
+import { default as Button } from "../components/Button";
+
+export default ({ onPressLeft, textLeft }) => {
   return (
     <View style={styles.panel}>
-      <View style={styles.btn}>
-        <Button title="Lista" />
-      </View>
-      <View style={styles.btn}>
-        <Button title="Mostrar/Ocultar" />
-      </View>
+      <Button title={textLeft} style={styles.btn} onPress={onPressLeft} />
+      <Button
+        title="Mostrar/Ocultar"
+        style={styles.btn}
+        onPress={() => console.log("111")}
+      />
     </View>
   );
 };
@@ -22,6 +24,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    marginHorizontal: 10,
+    marginHorizontal: 25,
   },
 });
