@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 import { default as Button } from "../components/Button";
 
-export default ({ onPressLeft, textLeft }) => {
+export default ({ onPressLeft, textLeft, togglePointsFilter }) => {
   return (
     <View style={styles.panel}>
       <Button title={textLeft} style={styles.btn} onPress={onPressLeft} />
       <Button
         title="Mostrar/Ocultar"
         style={styles.btn}
-        onPress={() => console.log("111")}
+        onPress={togglePointsFilter}
       />
     </View>
   );

@@ -9,6 +9,9 @@ export default function App() {
   const [namePoint, setNamePoint] = useState("");
   const [visibility, setVisibility] = useState(false);
   const [visibilityFilter, setVisibilityFilter] = useState("new_point");
+  const [pointsFilter, setPointsFilter] = useState(true);
+
+  const togglePointsFilter = () => setPointsFilter(!pointsFilter);
 
   const handleLongPress = ({ nativeEvent }) => {
     setVisibilityFilter("new_point");
@@ -31,8 +34,10 @@ export default function App() {
   };
 
   const handleList = () => {
-    setVisibilityFilter("all_points");
-    setVisibility(true);
+    if (points.length > 0) {
+      setVisibilityFilter("all_points");
+      setVisibility(true);
+    }
   };
 
   const handleCloseModal = () => {
@@ -41,8 +46,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Map longPress={handleLongPress} />
-      <Panel onPressLeft={handleList} textLeft="Lista" />
+      <Map
+        longPress={handleLongPress}
+        points={points}
+        pointsFilter={pointsFilter}
+      />
+      <Panel
+        onPressLeft={handleList}
+        textLeft="Lista"
+        togglePointsFilter={togglePointsFilter}
+      />
       <ModalView visibility={visibility}>
         {visibilityFilter === "new_point" ? (
           <View style={styles.form}>
